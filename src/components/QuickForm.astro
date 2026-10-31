@@ -1,0 +1,10 @@
+---
+import { site } from '../data/site';
+interface Props { dark?: boolean }
+const { dark = false } = Astro.props;
+---
+<form class:list={['quick-form', { dark }]} data-wa-form={site.waNumber}>
+  <label><span class="sr">שם מלא</span><input name="name" placeholder="שם מלא *" required autocomplete="name" /></label>
+  <label><span class="sr">נייד</span><input name="phone" type="tel" placeholder="נייד *" required autocomplete="tel" inputmode="tel" /></label>
+  <button type="submit">ברוך חזור אלי</button>
+</form>

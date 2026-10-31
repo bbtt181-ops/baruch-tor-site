@@ -1,0 +1,58 @@
+---
+import Base from '../layouts/Base.astro';
+import QuickForm from '../components/QuickForm.astro';
+import HeroSlides from '../components/HeroSlides.astro';
+import { site, wa, waMsg, cities, faq } from '../data/site';
+
+export function getStaticPaths() {
+  return cities.filter((c) => c.enabled).map((c) => ({ params: { city: c.slug }, props: { c } }));
+}
+const { c } = Astro.props as { c: any };
+const msg = c.name === 'חריש' ? waMsg.harish : `היי ברוך, אני מ${c.name} ואשמח לפרטים על שיעורי נהיגה`;
+---
+<Base
+  title={`${c.title} • אוטומט עם איסוף מהבית • ${site.name}`}
+  description={`${c.title}: ${site.name}, מורה נהיגה עצמאי על אוטומט. איסוף מהבית ב${c.name}, ${site.price} ₪ לשיעור של ${site.lessonMinutes} דקות, הטסט ב${site.testCity}. ${site.phoneDisplay}`}
+  city={c.name}
+  waText={msg}
+>
+  <section class="hero hero-city">
+    <HeroSlides />
+    <div class="hero-shade" aria-hidden="true"></div>
+    <div class="container hero-inner">
+      <p class="hero-kicker">לומדים ב{c.name}, נבחנים ב{site.testCity}</p>
+      <h1 class="hero-title">{c.h1}</h1>
+      <p class="hero-sub">{c.lead}</p>
+      <QuickForm dark />
+    </div>
+  </section>
+
+  <section class="intro">
+    <div class="container narrow">
+      <h2 class="sec-title">שיעורי נהיגה ב{c.name}, טסט ב{site.testCity}</h2>
+      {c.body.map((p: string) => <p>{p}</p>)}
+      <ul class="feature-list">
+        <li>איסוף מהבית ב{c.name}</li>
+        <li>{site.car}</li>
+        <li>{site.price} ₪ לשיעור של {site.lessonMinutes} דקות</li>
+        <li>מינימום {site.minLessonsByLaw} שיעורי חובה לפי החוק</li>
+        <li>תרגול מסלולים לקראת הטסט ב{site.testCity}</li>
+      </ul>
+      <p><a class="promo" href={wa(msg)} target="_blank" rel="noopener"><b>גרים ב{c.name}?</b> שלחו הודעה בוואטסאפ</a></p>
+    </div>
+  </section>
+
+  <section class="faq-sec">
+    <div class="container narrow">
+      <h2 class="sec-title">שאלות ותשובות</h2>
+      {faq.map((f) => <details><summary>{f.q}</summary><p>{f.a}</p></details>)}
+    </div>
+  </section>
+
+  <section class="contact-band">
+    <div class="container contact-inner">
+      <div><h2>מתחילים ללמוד ב{c.name}</h2><p>השאירו שם ונייד ואחזור אליכם.</p></div>
+      <QuickForm />
+    </div>
+  </section>
+</Base>

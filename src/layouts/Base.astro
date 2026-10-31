@@ -1,0 +1,125 @@
+---
+import '../styles/global.css';
+import Schema from '../components/Schema.astro';
+import { site, wa, waMsg } from '../data/site';
+
+interface Props { title: string; description: string; city?: string; waText?: string }
+const { title, description, city, waText = waMsg.first } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const nav = [
+  { href: '/#about', label: 'אודות' },
+  { href: '/#lessons', label: 'שיעורים ומחיר' },
+  { href: '/#steps', label: 'טופס ירוק ותאוריה' },
+  { href: '/#test', label: 'הטסט בחדרה' },
+  { href: '/moreh-nehiga-harish/', label: 'מורה נהיגה בחריש' },
+  { href: '/#contact', label: 'צור קשר' },
+];
+---
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonical} />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="he_IL" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:image" content={new URL('/images/hero-wide.svg', Astro.site).href} />
+  <meta name="theme-color" content="#01467D" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;800;900&display=swap" />
+  <Schema url={canonical} city={city} />
+</head>
+<body>
+  <a class="skip" href="#main">דילוג לתוכן</a>
+  <header class="site-header">
+    <div class="container header-row">
+      <a class="logo" href="/" aria-label={`${site.name} – דף הבית`}>
+        <span class="logo-plate" aria-hidden="true">ל</span>
+        <span class="logo-words"><b>ברוך תור</b><small>{site.tagline}</small></span>
+      </a>
+      <nav class="main-nav" aria-label="ניווט ראשי">
+        <ul>{nav.map((n) => <li><a href={n.href}>{n.label}</a></li>)}</ul>
+      </nav>
+      <a class="header-phone" href={`tel:${site.phoneLocal}`}>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>
+        <span dir="ltr">{site.phoneDisplay}</span>
+      </a>
+      <button class="menu-toggle" aria-expanded="false" aria-controls="mobile-menu" aria-label="תפריט"><span></span><span></span><span></span></button>
+    </div>
+    <div id="mobile-menu" class="mobile-menu" hidden>
+      <ul>{nav.map((n) => <li><a href={n.href}>{n.label}</a></li>)}</ul>
+    </div>
+  </header>
+
+  <main id="main"><slot /></main>
+
+  <footer class="site-footer">
+    <div class="container footer-cols">
+      <div>
+        <h2 class="footer-h">חשוב לדעת</h2>
+        <ul>
+          <li><a href="/#lessons">מחיר שיעור</a></li>
+          <li><a href="/#steps">טופס ירוק ובדיקת עיניים</a></li>
+          <li><a href="/#test">הטסט בחדרה</a></li>
+          <li><a href="/#faq">שאלות ותשובות</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="footer-h">אזורי לימוד</h2>
+        <ul>
+          <li><a href="/moreh-nehiga-harish/">מורה נהיגה בחריש</a></li>
+          {site.areas.filter((a) => a !== site.baseCity).map((a) => <li>{a}</li>)}
+          <li>{site.areasExtra}</li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="footer-h">שעות הפעילות</h2>
+        <dl class="footer-hours">
+          {site.hours.map((h) => <><dt>{h.label}</dt><dd dir="ltr">{h.open}-{h.close}</dd></>)}
+          <dt>שבת</dt><dd>סגור</dd>
+        </dl>
+      </div>
+      <div class="footer-actions">
+        <h2 class="footer-h">דברו איתי</h2>
+        <a class="pill-btn pill-wa" href={wa(waText)} target="_blank" rel="noopener">שלחו הודעה בוואטסאפ</a>
+        <a class="pill-btn pill-call" href={`tel:${site.phoneLocal}`}>חייגו <span dir="ltr">{site.phoneDisplay}</span></a>
+        {site.facebook && <a class="pill-btn pill-fb" href={site.facebook} target="_blank" rel="noopener">בקרו בעמוד הפייסבוק</a>}
+      </div>
+    </div>
+    <p class="container footer-seo">
+      <a href="/">{site.name} – {site.tagline}</a>: מורה נהיגה עצמאי על אוטומט ב{site.areas.join(', ')} {site.areasExtra}. איסוף מהבית, {site.price} ₪ לשיעור של {site.lessonMinutes} דקות, הטסט נערך ב{site.testCity}. • טל. <span dir="ltr">{site.phoneDisplay}</span>
+    </p>
+  </footer>
+
+  <div class="mobile-bar">
+    <a class="mb-wa" href={wa(waText)} target="_blank" rel="noopener">וואטסאפ</a>
+    <a class="mb-call" href={`tel:${site.phoneLocal}`}>חייגו</a>
+  </div>
+
+  <script>
+    const t = document.querySelector('.menu-toggle');
+    const m = document.getElementById('mobile-menu');
+    t?.addEventListener('click', () => {
+      const open = t.getAttribute('aria-expanded') === 'true';
+      t.setAttribute('aria-expanded', String(!open));
+      if (m) m.hidden = open;
+    });
+    m?.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => { if (m) m.hidden = true; t?.setAttribute('aria-expanded', 'false'); }));
+    document.querySelectorAll<HTMLFormElement>('form[data-wa-form]').forEach((f) => {
+      f.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const d = new FormData(f);
+        const lines = ['היי ברוך, אשמח שתחזור אליי.', `שם: ${d.get('name') ?? ''}`, `נייד: ${d.get('phone') ?? ''}`];
+        window.location.href = `https://wa.me/${f.dataset.waForm}?text=${encodeURIComponent(lines.join('\n'))}`;
+      });
+    });
+  </script>
+</body>
+</html>

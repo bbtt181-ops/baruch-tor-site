@@ -1,0 +1,20 @@
+---
+import { heroPhotos, unsplash } from '../data/heroPhotos';
+const per = 6; // seconds per photo
+const total = per * heroPhotos.length;
+---
+<div class="hero-slides" aria-hidden="true" style={`--total:${total}s`}>
+  {heroPhotos.map((p, i) => (
+    <img
+      class="hero-bg"
+      src={unsplash(p.id, 1920)}
+      srcset={`${unsplash(p.id, 960)} 960w, ${unsplash(p.id, 1440)} 1440w, ${unsplash(p.id, 1920)} 1920w`}
+      sizes="100vw"
+      alt=""
+      width="1920" height="1280"
+      loading={i === 0 ? 'eager' : 'lazy'}
+      fetchpriority={i === 0 ? 'high' : 'auto'}
+      style={`animation-delay:${i * per - per * 0.18}s`}
+    />
+  ))}
+</div>

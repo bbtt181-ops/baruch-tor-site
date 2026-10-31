@@ -1,0 +1,138 @@
+---
+import Base from '../layouts/Base.astro';
+import QuickForm from '../components/QuickForm.astro';
+import HeroSlides from '../components/HeroSlides.astro';
+import { site, wa, waMsg, steps, faq } from '../data/site';
+
+const tiles = [
+  { color: 'teal', title: 'שיעור נהיגה אוטומטי', sub: `${site.price} ₪ לשיעור של ${site.lessonMinutes} דקות`, cta: 'קבעו שיעור', href: wa(waMsg.first), ext: true, icon: 'car' },
+  { color: 'red', title: 'איסוף מהבית', sub: 'חריש, חדרה, פרדס חנה-כרכור, אור עקיבא וכל יישובי האזור', cta: 'איפה אני אוסף', href: '#areas', icon: 'home' },
+  { color: 'green', title: `טסט ב${site.testCity}`, sub: 'מתרגלים את הכבישים של העיר לפני היום הגדול', cta: 'קראו עוד', href: '#test', icon: 'flag' },
+  { color: 'navy', title: 'טופס ירוק ובדיקות', sub: 'מה עושים לפני השיעור הראשון', cta: 'קראו עוד', href: '#steps', icon: 'doc' },
+  { color: 'teal', title: 'תאוריה', sub: 'חוקי תנועה ותמרורים, ואז מבחן התאוריה', cta: 'קראו עוד', href: '#steps', icon: 'book' },
+  { color: 'red', title: `${site.minLessonsByLaw} שיעורי חובה`, sub: 'המינימום שקובע החוק לפני טסט', cta: 'קראו עוד', href: '#faq', icon: 'list' },
+];
+const icons: Record<string, string> = {
+  car: 'M5 16l1.6-5.2A2 2 0 0 1 8.5 9.4h7a2 2 0 0 1 1.9 1.4L19 16M4 16h16v3H4zM7 19v2M17 19v2',
+  home: 'M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z',
+  flag: 'M5 21V4m0 0h11l-2 4 2 4H5',
+  doc: 'M7 3h7l5 5v13H7zM14 3v5h5M10 13h6M10 17h6',
+  book: 'M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2zM4 5v16',
+  list: 'M9 6h11M9 12h11M9 18h11M4 6h.01M4 12h.01M4 18h.01',
+};
+const features = [
+  `מורה אחד, מההתחלה ועד הטסט: ${site.years} שנות ניסיון בהוראת נהיגה`,
+  `${site.car}, נוחה ומפנקת`,
+  'איסוף והחזרה עד הבית, בית הספר או העבודה',
+  'סבלנות, הסברים ברורים ואווירה רגועה בשיעור',
+  `שעות לימוד נוחות: א׳–ה׳ מ-${site.hours[0].open} עד ${site.hours[0].close}, וגם בימי שישי`,
+  `מחיר מלא וגלוי: ${site.price} ₪ לשיעור של ${site.lessonMinutes} דקות`,
+  `טסט פנימי ותרגול מסלולים לקראת הטסט ב${site.testCity}`,
+];
+---
+<Base
+  title={`ברוך תור • מורה נהיגה בחריש • רישיון על אוטומט עם איסוף מהבית`}
+  description={`${site.name}, מורה נהיגה עצמאי על אוטומט בחריש, חדרה, בנימינה, פרדס חנה-כרכור, אור עקיבא וקיסריה. ${site.years} שנות ניסיון, איסוף מהבית, ${site.price} ₪ לשיעור. הטסט בחדרה.`}
+>
+  <!-- HERO: full-width open road, headline + quick lead form -->
+  <section class="hero">
+    <HeroSlides />
+    <div class="hero-shade" aria-hidden="true"></div>
+    <div class="container hero-inner">
+      <p class="hero-kicker">לומדים ב{site.baseCity}, נבחנים ב{site.testCity}</p>
+      <h2 class="hero-title hero-title-long">נהיגה בביטחון מהשיעור הראשון, קצב רגוע ונינוח עם הסבר ברור וליווי אישי עד לרישיון המיוחל.</h2>
+      <p class="hero-sub">{site.price} ₪ לשיעור · איסוף מהבית · יונדאי אוטומטית חדישה</p>
+      <QuickForm dark />
+      <div class="hero-badge"><b>{site.years}</b><span>שנות הוראת<br />נהיגה</span></div>
+    </div>
+  </section>
+
+  <!-- 6 TILES -->
+  <section id="lessons" class="tiles-wrap">
+    <div class="container tiles">
+      {tiles.map((t) => (
+        <a class={`tile tile-${t.color}`} href={t.href} {...(t.ext ? { target: '_blank', rel: 'noopener' } : {})}>
+          <svg class="tile-ico" viewBox="0 0 24 24" aria-hidden="true"><path d={icons[t.icon]} fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg>
+          <b>{t.title}</b>
+          <span>{t.sub}</span>
+          <em>{t.cta}</em>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <!-- SEO INTRO + VIDEO -->
+  <section id="about" class="intro">
+    <div class="container intro-grid">
+      <div>
+        <h1>מורה נהיגה בחריש והסביבה: רישיון על אוטומט אצל ברוך תור</h1>
+        <p>ברוך תור הוא מורה נהיגה עצמאי, ניסיון מעל יותר מעשרים שנה.<br />מלמד נהיגה על רכב אוטומטי בחריש ובכל יישובי האזור, עם איסוף מהבית ויחס אישי לכל תלמיד ותלמידה.<br />נהיגה ברכב אוטומטי — קלה וזריזה יותר ללמידה, מתאימה לכל גיל, ומושלמת למי שרוצה להתרכז רק בכביש ולהוציא רישיון מהר יותר.</p>
+        <ul class="check-list">
+          <li>קל ומהיר יותר להגיע לרמה גבוהה</li>
+          <li>מתאים לכל גיל ולכל רמת ניסיון</li>
+          <li>הכנה מלאה לטסט</li>
+          <li>אידיאלי לאנשים עם חרדת נהיגה והפרעות קשב וריכוז</li>
+        </ul>
+        <p>מאיזה גיל אפשר להתחיל? כמה שיעורים צריך? מה עושים לפני השיעור הראשון?</p>
+        <p><a class="strong-link" href="#faq">כל השאלות והתשובות על לימוד נהיגה &gt;&gt;</a></p>
+        <a class="promo" href={wa(waMsg.first)} target="_blank" rel="noopener"><b>מתחילים השבוע?</b> שלחו הודעה ונקבע שיעור ראשון</a>
+      </div>
+      <div class="video-thumb">
+        <img src="/images/hero-wide.svg" alt="" width="1920" height="820" loading="lazy" />
+        <span class="play" aria-hidden="true">▶</span>
+        <span class="video-cap">כאן ייכנס סרטון היכרות קצר</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES CHECKLIST -->
+  <section class="features">
+    <div class="container">
+      <ul class="feature-list">{features.map((f) => <li>{f}</li>)}</ul>
+      <p id="areas" class="local-text">
+        שיעורי נהיגה על אוטומט מעולם לא היו קרובים יותר לתושבי האזור. אני אוסף תלמידים מ{site.areas.join(', ')} {site.areasExtra}, וקובע את מועדי השיעורים לפי מה שנוח לכם. הבסיס שלי ב{site.baseCity}, והטסט נערך תמיד ב{site.testCity}.
+      </p>
+    </div>
+  </section>
+
+  <!-- STEPS -->
+  <section id="steps" class="steps">
+    <div class="container">
+      <h2 class="sec-title">הדרך לרישיון, בחמישה שלבים</h2>
+      <ol class="step-list">
+        {steps.map((s, i) => <li id={i === 4 ? 'test' : undefined}><span class="step-n">{i + 1}</span><b>{s.title}</b><p>{s.text}</p></li>)}
+      </ol>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section class="reviews">
+    <div class="container">
+      <h2 class="sec-title">המלצות של תלמידים על ברוך</h2>
+      <div class="review-row">
+        {[1, 2, 3, 4].map(() => (
+          <div class="review-card"><p>כאן תופיע ביקורת אמיתית של תלמיד מגוגל או מפייסבוק.</p><b>שם התלמיד</b></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="faq-sec">
+    <div class="container narrow">
+      <h2 class="sec-title">שאלות ותשובות</h2>
+      {faq.map((f) => <details><summary>{f.q}</summary><p>{f.a}</p></details>)}
+    </div>
+  </section>
+
+  <!-- CONTACT BAND -->
+  <section id="contact" class="contact-band">
+    <div class="container contact-inner">
+      <div>
+        <h2>דברו איתי</h2>
+        <p>השאירו שם ונייד ואחזור אליכם, או חייגו <a href={`tel:${site.phoneLocal}`} dir="ltr">{site.phoneDisplay}</a></p>
+      </div>
+      <QuickForm />
+    </div>
+  </section>
+</Base>

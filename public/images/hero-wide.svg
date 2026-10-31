@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 820" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3B6EA8"/>
+      <stop offset=".55" stop-color="#9CC3E4"/>
+      <stop offset="1" stop-color="#F6D7A7"/>
+    </linearGradient>
+    <linearGradient id="field" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8FA65A"/>
+      <stop offset="1" stop-color="#5E7B3A"/>
+    </linearGradient>
+    <linearGradient id="road" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5A5F66"/>
+      <stop offset="1" stop-color="#2F3337"/>
+    </linearGradient>
+    <radialGradient id="sun" cx=".5" cy=".5" r=".5">
+      <stop offset="0" stop-color="#FFF4D6"/>
+      <stop offset=".5" stop-color="#FFD98A" stop-opacity=".8"/>
+      <stop offset="1" stop-color="#FFD98A" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1920" height="820" fill="url(#sky)"/><g transform="translate(-260 -60)">
+  <circle cx="1060" cy="470" r="190" fill="url(#sun)"/>
+  <path d="M0 470 Q200 430 420 455 T860 445 T1300 440 T2400 455 V520 H-400 V470Z" fill="#7C93B0" opacity=".55"/>
+  <path d="M0 500 Q260 470 520 490 T1040 480 T2400 495 V900 H-400 V500Z" fill="url(#field)"/>
+  <g fill="#4C6B2E" opacity=".9">
+    <circle cx="180" cy="505" r="26"/><circle cx="215" cy="500" r="20"/><circle cx="1330" cy="500" r="30"/><circle cx="1375" cy="508" r="22"/>
+    <circle cx="560" cy="492" r="14"/><circle cx="1180" cy="490" r="12"/>
+  </g>
+  <path d="M760 490 L840 490 L1450 900 L150 900 Z" fill="url(#road)"/>
+  <path d="M770 490 L180 900" stroke="#E9EBED" stroke-width="10"/>
+  <path d="M830 490 L1420 900" stroke="#E9EBED" stroke-width="10"/>
+  <g fill="#F2C230">
+    <path d="M797 505 h6 l2 22 h-10z"/><path d="M795 550 h10 l3 34 h-16z"/><path d="M792 615 h16 l4 52 h-24z"/><path d="M788 712 h24 l6 80 h-36z"/><path d="M782 845 h36 l6 55 h-48z"/>
+  </g>
+  <!-- generic hatchback with learner sign, rear view -->
+  <g transform="translate(640 640)">
+    <ellipse cx="160" cy="205" rx="190" ry="18" fill="#000" opacity=".25"/>
+    <rect x="10" y="150" width="50" height="58" rx="10" fill="#1E2226"/>
+    <rect x="260" y="150" width="50" height="58" rx="10" fill="#1E2226"/>
+    <path d="M40 70 Q60 10 160 8 Q260 10 280 70 L305 120 Q320 150 300 185 H20 Q0 150 15 120 Z" fill="#F4F5F6"/>
+    <path d="M70 70 Q90 30 160 28 Q230 30 250 70 Z" fill="#26323F"/>
+    <rect x="30" y="118" width="58" height="22" rx="6" fill="#C8352E"/>
+    <rect x="232" y="118" width="58" height="22" rx="6" fill="#C8352E"/>
+    <rect x="115" y="140" width="90" height="26" rx="3" fill="#F2C230" stroke="#1E2226" stroke-width="2"/>
+    <rect x="128" y="-34" width="64" height="44" rx="5" fill="#D7262E"/>
+    <text x="160" y="2" text-anchor="middle" font-family="Arial, sans-serif" font-weight="700" font-size="36" fill="#fff">ל</text>
+  </g>
+</g></svg>

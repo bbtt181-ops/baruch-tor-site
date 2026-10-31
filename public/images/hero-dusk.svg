@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 820" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="dsky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1C2A4A"/><stop offset=".55" stop-color="#6A4E7A"/><stop offset="1" stop-color="#F29A5C"/></linearGradient>
+    <linearGradient id="droad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3B3F48"/><stop offset="1" stop-color="#1D2026"/></linearGradient>
+    <radialGradient id="glow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#FFE7A8" stop-opacity=".9"/><stop offset="1" stop-color="#FFE7A8" stop-opacity="0"/></radialGradient>
+  </defs>
+  <rect width="1920" height="820" fill="url(#dsky)"/>
+  <circle cx="1250" cy="470" r="70" fill="#FFC27A" opacity=".85"/>
+  <path d="M0 480 Q300 440 640 465 T1300 455 T1920 470 V530 H0Z" fill="#4A3B5A" opacity=".8"/>
+  <path d="M0 505 Q320 480 700 500 T1920 505 V820 H0Z" fill="#2C2F3A"/>
+  <path d="M560 500 L640 500 L1250 820 L-50 820 Z" fill="url(#droad)"/>
+  <path d="M570 500 L0 800" stroke="#C9CDD2" stroke-width="8"/><path d="M630 500 L1220 820" stroke="#C9CDD2" stroke-width="8"/>
+  <g fill="#F2C230"><path d="M597 512 h6 l2 20 h-10z"/><path d="M594 556 h12 l3 32 h-18z"/><path d="M590 620 h20 l4 48 h-28z"/><path d="M585 710 h30 l6 74 h-42z"/></g>
+  <!-- street lights -->
+  <g stroke="#161A20" stroke-width="8" fill="none"><path d="M900 640 V380 q0 -20 -30 -20 h-40"/><path d="M1080 760 V300 q0 -24 -36 -24 h-50"/><path d="M760 560 V420 q0 -14 -22 -14 h-28"/></g>
+  <circle cx="830" cy="362" r="60" fill="url(#glow)"/><circle cx="994" cy="278" r="80" fill="url(#glow)"/><circle cx="710" cy="408" r="40" fill="url(#glow)"/>
+  <!-- car with lit taillights -->
+  <g transform="translate(400 610)">
+    <ellipse cx="160" cy="190" rx="185" ry="16" fill="#000" opacity=".35"/>
+    <rect x="18" y="138" width="46" height="54" rx="10" fill="#0F1216"/><rect x="256" y="138" width="46" height="54" rx="10" fill="#0F1216"/>
+    <path d="M42 66 Q62 8 160 6 Q258 8 278 66 L302 112 Q316 140 298 172 H22 Q4 140 18 112 Z" fill="#D9DCE0"/>
+    <path d="M72 66 Q92 28 160 26 Q228 28 248 66 Z" fill="#1B2733"/>
+    <circle cx="60" cy="120" r="46" fill="#FF3B30" opacity=".25"/><circle cx="260" cy="120" r="46" fill="#FF3B30" opacity=".25"/>
+    <rect x="32" y="110" width="56" height="20" rx="6" fill="#FF3B30"/><rect x="232" y="110" width="56" height="20" rx="6" fill="#FF3B30"/>
+    <rect x="116" y="130" width="88" height="24" rx="3" fill="#F2C230" stroke="#1E2226" stroke-width="2"/>
+    <rect x="128" y="-36" width="64" height="44" rx="5" fill="#D7262E"/>
+    <text x="160" y="0" text-anchor="middle" font-family="Arial, sans-serif" font-weight="700" font-size="36" fill="#fff">ל</text>
+  </g>
+</svg>

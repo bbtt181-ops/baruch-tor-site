@@ -1,0 +1,35 @@
+---
+import { site, faq as faqData } from '../data/site';
+interface Props { url: string; withFaq?: boolean; city?: string }
+const { url, withFaq = true, city } = Astro.props;
+
+const business = {
+  '@context': 'https://schema.org',
+  '@type': 'DrivingSchool',
+  name: `${site.name} – ${site.tagline}`,
+  description: `מורה נהיגה עצמאי על אוטומט ב${city ?? site.baseCity} והסביבה. איסוף מהבית, ${site.price} ₪ לשיעור של ${site.lessonMinutes} דקות. הטסט נערך ב${site.testCity}.`,
+  url,
+  telephone: site.phoneTel,
+  priceRange: `₪${site.price}`,
+  address: { '@type': 'PostalAddress', addressLocality: site.baseCity, addressCountry: 'IL' },
+  geo: { '@type': 'GeoCoordinates', latitude: site.geo.lat, longitude: site.geo.lng },
+  areaServed: site.areas.map((name) => ({ '@type': 'City', name })),
+  openingHoursSpecification: site.hours.map((h) => ({
+    '@type': 'OpeningHoursSpecification', dayOfWeek: h.days, opens: h.open, closes: h.close,
+  })),
+  makesOffer: {
+    '@type': 'Offer',
+    name: `שיעור נהיגה אוטומטי ${site.lessonMinutes} דקות`,
+    price: site.price, priceCurrency: 'ILS',
+  },
+  ...(site.facebook ? { sameAs: [site.facebook] } : {}),
+};
+
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqData.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+};
+---
+<script type="application/ld+json" set:html={JSON.stringify(business)} />
+{withFaq && <script type="application/ld+json" set:html={JSON.stringify(faqLd)} />}
