@@ -45,7 +45,7 @@ const msg = c.name === 'חריש' ? waMsg.harish : `היי ברוך, אני מ${
   <section class="faq-sec">
     <div class="container narrow">
       <h2 class="sec-title">שאלות ותשובות</h2>
-      {faq.map((f) => <details><summary>{f.q}</summary><p>{f.a}</p></details>)}
+      {faq.map((f: any) => <details><summary>{f.q}</summary>{f.html ? <p set:html={f.html} /> : <p>{f.a}</p>}</details>)}
     </div>
   </section>
 
