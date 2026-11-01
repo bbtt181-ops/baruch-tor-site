@@ -78,3 +78,13 @@ export const cities = [
   { slug: 'moreh-nehiga-or-akiva', name: 'אור עקיבא', enabled: false },
   { slug: 'moreh-nehiga-caesarea', name: 'קיסריה', enabled: false },
 ];
+
+// Real student reviews (copied from easy.co.il and Google Maps). Keep wording as written.
+export const reviewsSummary = { easyScore: 8.9, easyCount: 20, easyUrl: 'https://easy.co.il/page/27378497' };
+export const reviews = [
+  { name: 'Bar L.', source: 'easy', date: 'אוקטובר 2026', text: 'חיפשתי מורה נהיגה בחדרה בגוגל וברוך הייתה האופציה הראשונה שקפצה לי. אני כל כך שמחה שהחלטתי להתחיל ללמוד איתו. הוא קשוב ומשלב הומור תוך כדי הנהיגה כדי להקל על הלחץ. כל שיעור אני נהנית יותר ויותר ורק מחכה שהשיעור הבא שלי יגיע.' },
+  { name: 'Omer Efrat', source: 'google', date: 'אוקטובר 2026', text: 'מורה אדיב, אכפתי וסבלני ממש. כל שיעור קורה באווירה טובה, בכיף ובהומור. אין עצבים בכלל, והוא תמיד מרגיע את הלחץ ומקל על האווירה. חד משמעית ממליץ בחום.' },
+  { name: 'Cami S.', source: 'easy', date: 'אוגוסט 2026', text: 'ברוך מורה מדהים שעוזר ותומך לאורך כל הדרך. בשיעורים הוא סבלני ונותן את הטיפים הכי טובים שיש!' },
+  { name: 'נועם י.', source: 'easy', date: 'ספטמבר 2026', text: 'אין על ברוך בעולם! מלמד בכיף. בשנייה קלטתי את הקונספט של הנהיגה, הייתי בשוק כמה קל הוא עושה את זה. בשנייה אחת כל הלחץ ירד…' },
+  { name: 'קונסטנטין נ.', source: 'easy', date: 'יולי 2026', text: 'מצאתי את ברוך במקרה, בלי המלצות, בחיפוש רגיל ברשת, וקיבלתי החלטה רק על בסיס ההמלצות בתגובות. כל המלצה תואמת למציאות!' },
+];

@@ -2,7 +2,7 @@
 import Base from '../layouts/Base.astro';
 import QuickForm from '../components/QuickForm.astro';
 import HeroSlides from '../components/HeroSlides.astro';
-import { site, wa, waMsg, steps, faq } from '../data/site';
+import { site, wa, waMsg, steps, faq, reviews, reviewsSummary } from '../data/site';
 
 const tiles = [
   { color: 'teal', title: 'שיעור נהיגה אוטומטי', sub: `${site.price} ₪ לשיעור של ${site.lessonMinutes} דקות`, cta: 'קבעו שיעור', href: wa(waMsg.first), ext: true, icon: 'car' },
@@ -111,11 +111,17 @@ const features = [
   <section class="reviews">
     <div class="container">
       <h2 class="sec-title">המלצות של תלמידים על ברוך</h2>
+      <p class="review-summary"><b>{reviewsSummary.easyScore}</b> ציון ב-easy מתוך {reviewsSummary.easyCount} ביקורות · ★★★★★ בגוגל</p>
       <div class="review-row">
-        {[1, 2, 3, 4].map(() => (
-          <div class="review-card"><p>כאן תופיע ביקורת אמיתית של תלמיד מגוגל או מפייסבוק.</p><b>שם התלמיד</b></div>
+        {reviews.map((r) => (
+          <figure class="review-card">
+            {r.source === 'google' && <span class="review-stars" aria-label="5 כוכבים">★★★★★</span>}
+            <blockquote>{r.text}</blockquote>
+            <figcaption><b dir="auto">{r.name}</b><small>{r.source === 'google' ? 'ביקורת בגוגל' : 'ביקורת ב-easy'} · {r.date}</small></figcaption>
+          </figure>
         ))}
       </div>
+      <p class="review-more"><a class="strong-link" href={reviewsSummary.easyUrl} target="_blank" rel="noopener">לכל {reviewsSummary.easyCount} הביקורות ב-easy &gt;&gt;</a></p>
     </div>
   </section>
 
