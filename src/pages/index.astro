@@ -79,10 +79,9 @@ const features = [
         <p><a class="strong-link" href="#faq">כל השאלות והתשובות על לימוד נהיגה &gt;&gt;</a></p>
         <a class="promo" href={wa(waMsg.first)} target="_blank" rel="noopener"><b>מתחילים השבוע?</b> שלחו הודעה ונקבע שיעור ראשון</a>
       </div>
-      <div class="video-thumb">
-        <img src="/images/hero-wide.svg" alt="" width="1920" height="820" loading="lazy" />
-        <span class="play" aria-hidden="true">▶</span>
-        <span class="video-cap">כאן ייכנס סרטון היכרות קצר</span>
+      <div class="about-media">
+        <img class="about-photo" src="/images/students/baruch-student.jpg" alt="ברוך תור עם תלמיד שעבר טסט, מחזיקים שלט נהג חדש" width="1000" height="750" loading="lazy" />
+        <img class="about-cert" src="/images/students/certificate.jpg" alt="תעודת הוקרה לברוך תור" width="915" height="686" loading="lazy" />
       </div>
     </div>
   </section>
@@ -122,6 +121,17 @@ const features = [
         ))}
       </div>
       <p class="review-more"><a class="strong-link" href={reviewsSummary.easyUrl} target="_blank" rel="noopener">לכל {reviewsSummary.easyCount} הביקורות ב-easy &gt;&gt;</a></p>
+    </div>
+  </section>
+
+  <!-- PASSED GALLERY -->
+  <section class="passed">
+    <div class="container">
+      <h2 class="sec-title">מזל טוב לתלמידים שעברו טסט!</h2>
+      <div class="passed-grid">
+        {[1,2,3,4,5,6,7].map((n) => <img src={`/images/students/pass-${n}.jpg`} alt="תלמיד של ברוך תור אחרי שעבר טסט, עם שלט נהג חדש" width="750" height="1000" loading="lazy" />)}
+        <img src="/images/students/lesson-1.jpg" alt="ברוך תור בשיעור נהיגה עם תלמידה" width="300" height="225" loading="lazy" />
+      </div>
     </div>
   </section>
 

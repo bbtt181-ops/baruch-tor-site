@@ -209,3 +209,13 @@ html { scroll-padding-top: 84px; }
 #lessons { scroll-margin-top: 120px; }
 .logo-mark { width: 52px; height: 52px; display: block; flex: none; }
 .faq-sec details p a { color: var(--navy); font-weight: 700; text-decoration: underline; }
+
+/* about photos */
+.about-media { display: grid; gap: 14px; align-content: start; min-width: 0; }
+.about-photo { width: 100%; height: auto; aspect-ratio: 4/3; object-fit: cover; border-radius: 6px; display: block; }
+.about-cert { width: 62%; justify-self: center; height: auto; border-radius: 4px; box-shadow: 0 4px 14px rgba(1,70,125,.15); display: block; }
+/* passed-test gallery */
+.passed { padding-block: 56px; background: var(--white); }
+.passed-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+.passed-grid img { width: 100%; height: auto; aspect-ratio: 3/4; object-fit: cover; border-radius: 6px; display: block; }
+@media (max-width: 720px) { .passed-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
