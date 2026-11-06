@@ -1,7 +1,7 @@
 ---
 import '../styles/global.css';
 import Schema from '../components/Schema.astro';
-import { site, wa, waMsg } from '../data/site';
+import { site, wa, waMsg, cities } from '../data/site';
 
 interface Props { title: string; description: string; city?: string; waText?: string }
 const { title, description, city, waText = waMsg.first } = Astro.props;
@@ -28,7 +28,7 @@ const nav = [
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
   <meta property="og:url" content={canonical} />
-  <meta property="og:image" content={new URL('/images/hero-wide.svg', Astro.site).href} />
+  <meta property="og:image" content={new URL('/images/og.jpg', Astro.site).href} />
   <meta name="theme-color" content="#01467D" />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -75,7 +75,7 @@ const nav = [
         <h2 class="footer-h">אזורי לימוד</h2>
         <ul>
           <li><a href="/moreh-nehiga-harish/">מורה נהיגה בחריש</a></li>
-          {site.areas.filter((a) => a !== site.baseCity).map((a) => <li>{a}</li>)}
+          {site.areas.filter((a) => a !== site.baseCity).map((a) => { const cc = cities.find((x) => x.name === a && x.enabled); return <li>{cc ? <a href={`/${cc.slug}/`}>מורה נהיגה ב{a}</a> : a}</li>; })}
           <li>{site.areasExtra}</li>
         </ul>
       </div>

@@ -20,7 +20,7 @@ const msg = c.name === 'חריש' ? waMsg.harish : `היי ברוך, אני מ${
     <HeroSlides />
     <div class="hero-shade" aria-hidden="true"></div>
     <div class="container hero-inner">
-      <p class="hero-kicker">לומדים ב{c.name}, נבחנים ב{site.testCity}</p>
+      <p class="hero-kicker">{c.kicker ?? `לומדים ב${c.name}, נבחנים ב${site.testCity}`}</p>
       <h1 class="hero-title">{c.h1}</h1>
       <p class="hero-sub">{c.lead}</p>
       <QuickForm dark />
