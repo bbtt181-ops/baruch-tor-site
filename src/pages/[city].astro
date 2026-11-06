@@ -2,7 +2,7 @@
 import Base from '../layouts/Base.astro';
 import QuickForm from '../components/QuickForm.astro';
 import HeroSlides from '../components/HeroSlides.astro';
-import { site, wa, waMsg, cities, faq } from '../data/site';
+import { site, wa, waMsg, cities, faq, steps, reviews, reviewsSummary } from '../data/site';
 
 export function getStaticPaths() {
   return cities.filter((c) => c.enabled).map((c) => ({ params: { city: c.slug }, props: { c } }));
@@ -39,6 +39,42 @@ const msg = c.name === 'חריש' ? waMsg.harish : `היי ברוך, אני מ${
         <li>תרגול מסלולים לקראת הטסט ב{site.testCity}</li>
       </ul>
       <p><a class="promo" href={wa(msg)} target="_blank" rel="noopener"><b>גרים ב{c.name}?</b> שלחו הודעה בוואטסאפ</a></p>
+    </div>
+  </section>
+
+  <section class="steps">
+    <div class="container">
+      <h2 class="sec-title">הדרך לרישיון, בחמישה שלבים</h2>
+      <ol class="step-list">
+        {steps.map((s, i) => <li><span class="step-n">{i + 1}</span><b>{s.title}</b><p>{s.text}</p></li>)}
+      </ol>
+    </div>
+  </section>
+
+  <section class="reviews">
+    <div class="container">
+      <h2 class="sec-title">המלצות של תלמידים על ברוך</h2>
+      <p class="review-summary"><b>{reviewsSummary.easyScore}</b> ציון ב-easy מתוך {reviewsSummary.easyCount} ביקורות · ★★★★★ בגוגל</p>
+      <div class="review-row">
+        {reviews.slice(0, 6).map((r) => (
+          <figure class="review-card">
+            {r.source === 'google' && <span class="review-stars" aria-label="5 כוכבים">★★★★★</span>}
+            <blockquote>{r.text}</blockquote>
+            <figcaption><b dir="auto">{r.name}</b><small>{r.source === 'google' ? 'ביקורת בגוגל' : 'ביקורת ב-easy'}{r.date && ` · ${r.date}`}</small></figcaption>
+          </figure>
+        ))}
+      </div>
+      <p class="review-more"><a class="strong-link" href={reviewsSummary.easyUrl} target="_blank" rel="noopener">לכל {reviewsSummary.easyCount} הביקורות ב-easy &gt;&gt;</a></p>
+    </div>
+  </section>
+
+  <section class="passed">
+    <div class="container">
+      <h2 class="sec-title">מזל טוב לתלמידים שעברו טסט!</h2>
+      <div class="passed-grid">
+        {[1,2,3,4,5,6,7].map((n) => <img src={`/images/students/pass-${n}.jpg`} alt="תלמיד של ברוך תור אחרי שעבר טסט, עם שלט נהג חדש" width="750" height="1000" loading="lazy" />)}
+        <img src="/images/students/baruch-student.jpg" alt="ברוך תור עם תלמיד שעבר טסט" width="1000" height="750" loading="lazy" />
+      </div>
     </div>
   </section>
 
