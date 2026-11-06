@@ -20,7 +20,7 @@ export const site = {
   minLessonsByLaw: 28,
   startAge: '16 וחצי',
   hours: [
-    { label: 'ראשון עד חמישי', short: 'א׳–ה׳', open: '06:40', close: '17:20', days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday'] },
+    { label: 'ראשון עד חמישי', short: 'א׳–ה׳', open: '06:40', close: '19:20', days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday'] },
     { label: 'שישי', short: 'ו׳', open: '06:40', close: '15:20', days: ['Friday'] },
   ],
   closed: 'שבת: סגור',
