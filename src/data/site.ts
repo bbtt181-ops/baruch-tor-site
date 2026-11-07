@@ -9,7 +9,8 @@ export const site = {
   phoneTel: '+972544566181',
   phoneLocal: '0544566181',
   waNumber: '972544566181',
-  facebook: '', // TODO: Baruch's Facebook page URL
+  facebook: 'https://www.facebook.com/profile.php?id=61581815764929',
+  street: 'סביון',
   baseCity: 'חריש',
   testCity: 'חדרה',
   years: '20+',

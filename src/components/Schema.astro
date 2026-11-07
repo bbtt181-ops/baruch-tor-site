@@ -11,7 +11,7 @@ const business = {
   url,
   telephone: site.phoneTel,
   priceRange: `₪${site.price}`,
-  address: { '@type': 'PostalAddress', addressLocality: site.baseCity, addressCountry: 'IL' },
+  address: { '@type': 'PostalAddress', streetAddress: site.street, addressLocality: site.baseCity, addressCountry: 'IL' },
   geo: { '@type': 'GeoCoordinates', latitude: site.geo.lat, longitude: site.geo.lng },
   areaServed: site.areas.map((name) => ({ '@type': 'City', name })),
   openingHoursSpecification: site.hours.map((h) => ({
