@@ -113,12 +113,40 @@ const nav = [
       const sec = el.closest('header,footer,.mobile-bar,.hero,section');
       return sec ? (sec.id || sec.className.split(' ')[0] || sec.tagName.toLowerCase()) : 'page';
     };
+    // Lead log for fb2026: anonymous counts only (no names, no phones). Insert-only table in Supabase.
+    const LOG_URL = 'https://npilufobhgqomgglwwxb.supabase.co/rest/v1/lead_events';
+    const LOG_KEY = 'sb_publishable_E_hS9VR8lxrTV3rbcECCiQ_tESpYL-W';
+    const source = (() => {
+      try {
+        const utm = new URLSearchParams(location.search).get('utm_source');
+        if (utm) { sessionStorage.setItem('lead_src', utm.slice(0, 60)); return utm.slice(0, 60); }
+        const saved = sessionStorage.getItem('lead_src');
+        if (saved) return saved;
+        const ref = document.referrer ? new URL(document.referrer).hostname.replace(/^www\./, '') : '';
+        const s = !ref || ref === location.hostname.replace(/^www\./, '') ? 'direct'
+          : /google\./.test(ref) ? 'google' : /facebook\.|fb\.|instagram\./.test(ref) ? 'facebook'
+          : /easy\.co\.il/.test(ref) ? 'easy' : /bing\./.test(ref) ? 'bing' : /chatgpt|openai|perplexity|claude|gemini/.test(ref) ? 'ai' : ref;
+        sessionStorage.setItem('lead_src', s.slice(0, 60));
+        return s.slice(0, 60);
+      } catch { return 'unknown'; }
+    })();
+    const log = (kind: string, place = '') => {
+      if (navigator.webdriver) return;
+      try {
+        fetch(LOG_URL, {
+          method: 'POST', keepalive: true,
+          headers: { apikey: LOG_KEY, 'Content-Type': 'application/json', Prefer: 'return=minimal' },
+          body: JSON.stringify({ kind, page: location.pathname.slice(0, 200), place: place.slice(0, 60), source, referrer: (document.referrer || '').slice(0, 200) }),
+        }).catch(() => {});
+      } catch {}
+    };
+    log('page_view');
     document.addEventListener('click', (e) => {
       const a = (e.target as Element).closest('a[href]') as HTMLAnchorElement | null;
       if (!a) return;
       const href = a.getAttribute('href') || '';
       const kind = href.startsWith('https://wa.me/') ? 'whatsapp_click' : href.startsWith('tel:') ? 'phone_click' : null;
-      if (kind) track(kind, { page: location.pathname, place: where(a) });
+      if (kind) { track(kind, { page: location.pathname, place: where(a) }); log(kind, where(a)); }
     }, { capture: true });
     const t = document.querySelector('.menu-toggle');
     const m = document.getElementById('mobile-menu');
@@ -134,6 +162,7 @@ const nav = [
         const d = new FormData(f);
         const lines = ['היי ברוך, אשמח שתחזור אליי.', `שם: ${d.get('name') ?? ''}`, `נייד: ${d.get('phone') ?? ''}`];
         track('form_submit', { page: location.pathname, place: where(f) });
+        log('form_submit', where(f));
         window.location.href = `https://wa.me/${f.dataset.waForm}?text=${encodeURIComponent(lines.join('\n'))}`;
       });
     });
