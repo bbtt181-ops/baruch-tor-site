@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import Schema from '../components/Schema.astro';
+import Analytics from '@vercel/analytics/astro';
 import { site, wa, waMsg, cities } from '../data/site';
 
 interface Props { title: string; description: string; city?: string; waText?: string }
@@ -35,6 +36,7 @@ const nav = [
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;800;900&display=swap" />
   <Schema url={canonical} city={city} />
+  <Analytics />
 </head>
 <body>
   <a class="skip" href="#main">דילוג לתוכן</a>
@@ -104,6 +106,19 @@ const nav = [
   </div>
 
   <script>
+    import { track } from '@vercel/analytics';
+    // Lead tracking: count WhatsApp and phone clicks, with the page they came from.
+    const where = (el: Element) => {
+      const sec = el.closest('header,footer,.mobile-bar,.hero,section');
+      return sec ? (sec.id || sec.className.split(' ')[0] || sec.tagName.toLowerCase()) : 'page';
+    };
+    document.addEventListener('click', (e) => {
+      const a = (e.target as Element).closest('a[href]') as HTMLAnchorElement | null;
+      if (!a) return;
+      const href = a.getAttribute('href') || '';
+      const kind = href.startsWith('https://wa.me/') ? 'whatsapp_click' : href.startsWith('tel:') ? 'phone_click' : null;
+      if (kind) track(kind, { page: location.pathname, place: where(a) });
+    }, { capture: true });
     const t = document.querySelector('.menu-toggle');
     const m = document.getElementById('mobile-menu');
     t?.addEventListener('click', () => {
@@ -117,6 +132,7 @@ const nav = [
         e.preventDefault();
         const d = new FormData(f);
         const lines = ['היי ברוך, אשמח שתחזור אליי.', `שם: ${d.get('name') ?? ''}`, `נייד: ${d.get('phone') ?? ''}`];
+        track('form_submit', { page: location.pathname, place: where(f) });
         window.location.href = `https://wa.me/${f.dataset.waForm}?text=${encodeURIComponent(lines.join('\n'))}`;
       });
     });

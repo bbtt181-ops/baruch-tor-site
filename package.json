@@ -3,6 +3,14 @@
   "type": "module",
   "version": "0.1.0",
   "private": true,
-  "scripts": { "dev": "astro dev", "build": "astro build", "preview": "astro preview" },
-  "dependencies": { "@astrojs/sitemap": "^3.7.4", "astro": "^7.4.4" }
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.4",
+    "@vercel/analytics": "^2.0.1",
+    "astro": "^7.4.4"
+  }
 }
