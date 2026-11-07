@@ -221,3 +221,13 @@ html { scroll-padding-top: 84px; }
 @media (max-width: 720px) { .passed-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 /* hero text hugs the right edge on wide screens */
 .hero .hero-inner { max-width: none; margin-inline: 0; padding-inline: max(20px, env(safe-area-inset-right, 0px)) 20px; padding-inline-start: clamp(20px, 3vw, 48px); }
+/* guides */
+.guide h2 { font-size: 22px; color: var(--navy); margin: 28px 0 8px; }
+.guide p { font-size: 17px; line-height: 1.75; margin: 0 0 12px; }
+.guide-lead { font-size: 19px !important; color: var(--ink-soft); }
+.guide-crumb { margin-bottom: 4px !important; font-size: 15px !important; }
+.guide-crumb a { color: var(--teal); }
+.guide-list { list-style: none; padding: 0; display: grid; gap: 12px; margin: 16px 0; }
+.guide-list a { display: grid; gap: 4px; padding: 16px 18px; background: var(--white); border-right: 4px solid var(--teal); box-shadow: 0 2px 10px rgba(1,70,125,.08); border-radius: 6px; color: var(--ink); text-decoration: none; }
+.guide-list a b { color: var(--navy); font-size: 18px; }
+.guide-list a span { color: var(--ink-soft); font-size: 15px; }

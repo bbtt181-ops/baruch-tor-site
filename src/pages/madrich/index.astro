@@ -1,0 +1,16 @@
+---
+import Base from '../../layouts/Base.astro';
+import { site } from '../../data/site';
+import { guides } from '../../data/guides';
+---
+<Base title={`מדריכים ללימוד נהיגה • ${site.name}`} description={`מדריכים קצרים ללימוד נהיגה: אוטומט או ידני, פחד מנהיגה, והכנה לטסט בחדרה. מאת ${site.name}, מורה נהיגה בחריש.`}>
+  <section class="intro">
+    <div class="container narrow">
+      <h1>מדריכים ללימוד נהיגה</h1>
+      <p>תשובות ברורות לשאלות שתלמידים שואלים אותי הכי הרבה.</p>
+      <ul class="guide-list">
+        {guides.map((g) => <li><a href={`/madrich/${g.slug}/`}><b>{g.title}</b><span>{g.intro}</span></a></li>)}
+      </ul>
+    </div>
+  </section>
+</Base>

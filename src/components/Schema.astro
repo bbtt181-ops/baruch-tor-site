@@ -22,7 +22,7 @@ const business = {
     name: `שיעור נהיגה אוטומטי ${site.lessonMinutes} דקות`,
     price: site.price, priceCurrency: 'ILS',
   },
-  ...(site.facebook ? { sameAs: [site.facebook] } : {}),
+  sameAs: ['https://easy.co.il/page/27378497', 'https://www.google.com/maps/place/?q=place_id:ChIJf2k7-UoFHRUR57D4gCtF_hs', ...(site.facebook ? [site.facebook] : [])],
 };
 
 const faqLd = {

@@ -1,0 +1,46 @@
+---
+import Base from '../../layouts/Base.astro';
+import QuickForm from '../../components/QuickForm.astro';
+import { site, wa, waMsg } from '../../data/site';
+import { guides } from '../../data/guides';
+
+export function getStaticPaths() {
+  return guides.map((g) => ({ params: { slug: g.slug }, props: { g } }));
+}
+const { g } = Astro.props as { g: (typeof guides)[number] };
+const url = new URL(Astro.url.pathname, Astro.site).href;
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: g.title,
+  description: g.description,
+  inLanguage: 'he',
+  mainEntityOfPage: url,
+  author: { '@type': 'Person', name: site.name, jobTitle: 'מורה נהיגה' },
+  publisher: { '@type': 'Organization', name: `${site.name} – ${site.tagline}`, logo: new URL('/images/logo.svg', Astro.site).href },
+  image: new URL('/images/og.jpg', Astro.site).href,
+};
+const others = guides.filter((x) => x.slug !== g.slug);
+---
+<Base title={`${g.title} • ${site.name}`} description={g.description}>
+  <script type="application/ld+json" set:html={JSON.stringify(articleLd)} />
+  <article class="intro guide">
+    <div class="container narrow">
+      <p class="guide-crumb"><a href="/madrich/">מדריכים</a></p>
+      <h1>{g.title}</h1>
+      <p class="guide-lead">{g.intro}</p>
+      {g.sections.map((s) => (<><h2>{s.h}</h2>{s.p.map((t) => <p>{t}</p>)}</>))}
+      <p><a class="promo" href={wa(waMsg.first)} target="_blank" rel="noopener"><b>רוצים להתחיל?</b> שלחו הודעה ונקבע שיעור ראשון</a></p>
+      <h2>עוד מדריכים</h2>
+      <ul class="guide-list">
+        {others.map((o) => <li><a href={`/madrich/${o.slug}/`}><b>{o.title}</b></a></li>)}
+      </ul>
+    </div>
+  </article>
+  <section class="contact-band">
+    <div class="container contact-inner">
+      <div><h2>דברו איתי</h2><p>השאירו שם ונייד ואחזור אליכם, או חייגו <a href={`tel:${site.phoneLocal}`} dir="ltr">{site.phoneDisplay}</a></p></div>
+      <QuickForm />
+    </div>
+  </section>
+</Base>
