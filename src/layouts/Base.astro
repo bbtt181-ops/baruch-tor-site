@@ -118,7 +118,8 @@ const nav = [
     const LOG_KEY = 'sb_publishable_E_hS9VR8lxrTV3rbcECCiQ_tESpYL-W';
     const source = (() => {
       try {
-        const utm = new URLSearchParams(location.search).get('utm_source');
+        const qs = new URLSearchParams(location.search);
+        const utm = qs.get('utm_source') ? qs.get('utm_source') + (qs.get('utm_content') ? ':' + qs.get('utm_content') : '') : '';
         if (utm) { sessionStorage.setItem('lead_src', utm.slice(0, 60)); return utm.slice(0, 60); }
         const saved = sessionStorage.getItem('lead_src');
         if (saved) return saved;

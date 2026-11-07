@@ -14,7 +14,7 @@
 פרויקט Supabase: **fb2026-leads** (`npilufobhgqomgglwwxb`), דרך ה-connector של Supabase, `execute_sql`.
 טבלה `lead_events`: `created_at, kind, page, place, source, referrer`. אנונימי לגמרי, בלי שמות ובלי טלפונים.
 - `kind`: `page_view`, `whatsapp_click`, `phone_click`, `form_submit`
-- `source`: `google`, `facebook`, `easy`, `gbp`, `ai`, `bing`, `direct`, או `utm_source` מהקישור.
+- `source`: `google`, `facebook`, `easy`, `gbp`, `ai`, `bing`, `direct`, או `utm_source` מהקישור. אם בקישור יש גם `utm_content`, הוא נשמר אחרי נקודתיים: `facebook:review-noa`. לסיכום לפי ערוץ: `split_part(source, ':', 1)`.
 
 שאילתות בסיס (שעון ישראל):
 
